@@ -1,20 +1,90 @@
 <html> 
+    <link rel="stylesheet" href="style.css">
     <body>
-        <div class="Visualizer">
-            <p class="VisPlaceholder">Visuals will appear here</p> 
-        </div> 
-        <div class="Editor">
-            <p class="LineNumbering" style="top: 10px;">1</p>
-            <div class="EditorText" tabindex="0" onkeydown="textEditor(event);"></div>
-            <div class="Cursor"></div>
-            <div class="Error"><br></div>
+        <div class="main">
+            <div class="Visualizer">
+                <p class="VisPlaceholder">Visuals will appear here</p> 
+            </div> 
+            <div class="Editor">
+                <p class="LineNumbering" style="top: 10px;">1</p>
+                <div class="EditorText" tabindex="0" onkeydown="textEditor(event);"></div>
+                <div class="Cursor"></div>
+                <div class="Error"><br></div>
+            </div>
+            <div class="Run" onclick="compile();"><br>Run</div>
+            <input class="Speed" type="number" placeholder="change speed (ms)" onkeyup="speedChanged(event)">
+            <div class="TutorialBtn" onclick="show_tutorial()"><br>Tutorial</div>
+            <div class="SamplesBtn" onclick="toggle_samples()"><br>Samples</div>
+        </div>
+        <div class="Tutorial">
+            <div class="TutorialCloseBtn"
+            onclick="hide_tutorial()">
+                Close 
+            </div>
+            <div style="font-size: 40; width: 100%; text-align: center; margin-top: 60px; margin-bottom: 60px; font-weight: bold; letter-spacing: 1;">
+                Visualizer Tutorial
+            </div>
+            <div style="text-align: center;">
+            Welcome to this tutorial! We are going to take a look at how this website  works. This tutorial is going to take a look at 2 categories:
+            </div>
+            <br><br>
+            <span style="color: red;">-</span> Visualizing your code, using the top dark-grey area <br>
+            <span style="color: red">-</span> Editing your code, using the bottom dark-grey area 
+            <br><br>
+            <div style="text-align: center;">Take a look at the samples if you feel confused. If you're code seems right, yet the program is compiled successfully, please email me at eshaanbarkataki@gmail.com.<br><br>Let's go!</div>
+            <div style="font-size: 25; width: 100%; text-align: center; margin-top: 40px; margin-bottom: 40px; font-weight: bold; letter-spacing: 1;">
+                Editing:
+            </div>
+            The compiler accepts Javascript code. There is also syntax highlighting enabled. However, there are a few conditions to successfully compile:
+            <br><br>
+            <span style="color: red">-</span> No function declared that is named <span style="font-family: CodeFont; font-size: 18;">visualize</span>. 
+            That's the function that (hence the name) displays the variables. You don't want to replace it.
+            <br><br>
+            <span style="color: red">-</span>  All variables are declared without <span style="font-family: CodeFont; font-size: 18;">var</span> or <span style="font-family: CodeFont; font-size: 18;">let</span>. 
+            For example, a valid variable declaration would be
+            <span style="font-family: CodeFont; font-size: 18;">a = 5</span> but not 
+            <span style="font-family: CodeFont; font-size: 18;">var a = 5</span> or 
+            <span style="font-family: CodeFont; font-size: 18;">let a = 5</span>.
+            <br><br>
+            <span style="color: red">-</span> Don't use global variables! You may mess around with the variables in the source code, 
+            which will affect the website. Declare your variables with <span style="font-family: CodeFont; font-size: 18;">let</span> or <span style="font-family: CodeFont; font-size: 18;">var</span>
+
+            <br><br>
+            <div style="font-size: 25; width: 100%; text-align: center; margin-top: 40px; margin-bottom: 40px; font-weight: bold; letter-spacing: 1;">
+                Running:
+            </div>
+            Here's what you should keep in mind when running your program: <br><br>
+
+            <span style="color: red">-</span> You could visualize your code by adding 
+            <span style="font-family: CodeFont; font-size: 18">visualize()</span> onto a seperate line. 
+            <br><br>
+            <span style="color: red">-</span> Hit the green button on the bottom that says "Run", and it will run the code for you. 
+            <br><br>
+            <span style="color: red">-</span> There is a delay every time <span style="font-family: CodeFont; font-size: 18">visualize()</span> is called. 
+            This delay is adjustable using the text area on the bottom left. Just enter your delay in milliseconds.
+            <br><br>
+            <span style="color: red">-</span> When you execute your code, you cannot stop it. However, if your code is taking too long, 
+            just set the delay to 0 ms.
+            <br><br>
+            <span style="color: red;">-</span> If there are any errors in your code, then the editor will notify you.
+            The error notification will hide once you move your cursor or type anything. <br><br>
+            <span style="color: red;">-</span> the visualize functions is not allowed inside other functions. 
+            <br><br>
+        </div>
+        <div class="Samples">
+            <div class="SampleSelect" style="top: 10%; font-size: 20px;" onclick="set_sample('Functions')"><br>Functions</div>
+            <div class="SampleSelect" style="top: 27%; font-size: 19px;" onclick="set_sample('Insertation')"><br>Insertation Sort</div>
+            <div class="SampleSelect" style="top: 44%; font-size: 20px;" onclick="set_sample('Bubble')"><br>Bubble Sort</div>
+            <div class="SampleSelect" style="top: 61%; font-size: 19px;" onclick="set_sample('Simple')"><br>Simple Variable</div>
+            <div class="SampleSelect" style="top: 78%; font-size: 20px;" onclick="set_sample('Loops')"><br>For loops</div>
+            
         </div>
     </body>
     <head>
         <title>Code Analyzer</title>
-        <link rel="stylesheet" href="style.css">
+        <script src="samples.js"></script>
         <script src="visualize.js"></script>  
         <script src="texteditor.js"></script>
-        <script src="compiler.js"></script>
+        <script src="compiler.js"></script> 
    </head>
 </html> 
